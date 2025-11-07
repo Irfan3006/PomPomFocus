@@ -40,6 +40,9 @@ class PomPomFocus {
             "Chill time! 🌙"
         ];
         
+        this.workDurations = [25, 50, 75, 100];
+        this.breakDurations = [5, 10, 15, 20];
+        
         this.init();
     }
     
@@ -51,6 +54,7 @@ class PomPomFocus {
         this.updateStats();
         this.updateSessionNumber();
         this.setupAudio();
+        this.updateQuickSettingsButtons();
         
         // Request notification permission
         if ('Notification' in window && Notification.permission === 'default') {
@@ -75,11 +79,17 @@ class PomPomFocus {
         document.getElementById('workMode').addEventListener('click', () => this.switchMode('work'));
         document.getElementById('breakMode').addEventListener('click', () => this.switchMode('break'));
         
-        // Duration buttons
+        // Quick settings duration buttons
         document.querySelectorAll('.duration-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 const minutes = parseInt(e.target.dataset.minutes);
-                this.setWorkDuration(minutes);
+                if (Number.isNaN(minutes)) return;
+                
+                if (this.isBreak) {
+                    this.setBreakDuration(minutes);
+                } else {
+                    this.setWorkDuration(minutes);
+                }
             });
         });
         
@@ -231,10 +241,7 @@ class PomPomFocus {
         this.isBreak = mode === 'break';
         this.currentTime = this.isBreak ? this.breakTime * 60 : this.workTime * 60;
         
-        // Update mode buttons
-        document.querySelectorAll('.mode-btn').forEach(btn => btn.classList.remove('active'));
-        document.getElementById(mode + 'Mode').classList.add('active');
-        
+        this.updateModeDisplay();
         this.updateDisplay();
         this.updateMotivationalMessage();
     }
@@ -249,18 +256,14 @@ class PomPomFocus {
             this.updateDisplay();
         }
         
-        // Update duration buttons
-        document.querySelectorAll('.duration-btn').forEach(btn => {
-            btn.classList.remove('active');
-            if (parseInt(btn.dataset.minutes) === minutes) {
-                btn.classList.add('active');
-            }
-        });
-        
         // Update settings options
         this.updateSettingsOptions('focus', minutes);
         
         this.saveSettings();
+        
+        if (!this.isBreak) {
+            this.updateDurationButtons();
+        }
     }
     
     setBreakDuration(minutes) {
@@ -278,6 +281,10 @@ class PomPomFocus {
         
         // Save settings
         this.saveSettings();
+        
+        if (this.isBreak) {
+            this.updateDurationButtons();
+        }
     }
     
     updateSettingsOptions(type, minutes) {
@@ -413,6 +420,8 @@ class PomPomFocus {
         } else {
             timerCard.classList.remove('break-mode');
         }
+        
+        this.updateQuickSettingsButtons();
     }
     
     updateMotivationalMessage() {
@@ -597,17 +606,35 @@ class PomPomFocus {
         setTimeout(() => {
             this.updateSettingsOptions('focus', this.workTime);
             this.updateSettingsOptions('break', this.breakTime);
-            this.updateDurationButtons();
+            this.updateQuickSettingsButtons();
         }, 100);
     }
     
     updateDurationButtons() {
+        const targetValue = this.isBreak ? this.breakTime : this.workTime;
         document.querySelectorAll('.duration-btn').forEach(btn => {
-            btn.classList.remove('active');
-            if (parseInt(btn.dataset.minutes) === this.workTime) {
-                btn.classList.add('active');
+            const btnValue = parseInt(btn.dataset.minutes);
+            const isActive = !Number.isNaN(btnValue) && btnValue === targetValue;
+            btn.classList.toggle('active', isActive);
+        });
+    }
+    
+    updateQuickSettingsButtons() {
+        const durations = this.isBreak ? this.breakDurations : this.workDurations;
+        const buttons = document.querySelectorAll('.duration-btn');
+        
+        buttons.forEach((btn, index) => {
+            const value = durations[index];
+            if (typeof value === 'number') {
+                btn.dataset.minutes = String(value);
+                btn.textContent = `${value}m`;
+                btn.style.display = 'inline-flex';
+            } else {
+                btn.style.display = 'none';
             }
         });
+        
+        this.updateDurationButtons();
     }
     
     saveSettings() {

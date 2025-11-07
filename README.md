@@ -219,6 +219,7 @@ PomPomFocus/
 - Added input validation for work and break duration changes
 - Better timing for UI updates with deferred execution
 - Default break duration correctly set to 5 minutes
+- Quick settings buttons now adapt between focus and break durations
 
 ### Version 2.1.0 - Minimalist Design Overhaul
 - Complete UI redesign with clean, distraction-free interface

@@ -12,159 +12,382 @@
     <!-- AOS Animation -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&family=Comfortaa:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="app-container" id="appContainer">
+        <!-- Animated Background -->
+        <div class="animated-bg">
+            <div class="floating-shapes">
+                <div class="shape shape-1"></div>
+                <div class="shape shape-2"></div>
+                <div class="shape shape-3"></div>
+                <div class="shape shape-4"></div>
+                <div class="shape shape-5"></div>
+            </div>
+        </div>
+
         <!-- Header -->
-        <header class="header text-center py-3" data-aos="fade-down">
-            <div class="container">
-                <h1 class="app-title">
-                    <i class="bi bi-alarm-fill text-primary"></i>
-                    PomPomFocus
-                </h1>
-                <p class="subtitle mb-0">Your cute productivity companion 🐰</p>
+        <header class="header" data-aos="fade-down">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <div class="col-md-4">
+                        <div class="logo-section">
+                            <h1 class="app-title">
+                                <span class="logo-icon">🐰</span>
+                                PomPomFocus
+                            </h1>
+                        </div>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <div class="current-time-wrapper">
+                            <div class="current-time" id="currentTime">
+                                <i class="bi bi-clock"></i>
+                                <span>Loading...</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 text-end">
+                        <div class="header-controls">
+                            <button class="btn btn-sm btn-glass" id="themeToggle">
+                                <i class="bi bi-palette-fill"></i>
+                                <span class="btn-text">Pink Mode</span>
+                            </button>
+                            <button class="btn btn-sm btn-glass ms-2" id="settingsToggle">
+                                <i class="bi bi-gear-fill"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </header>
 
         <!-- Main Content -->
         <main class="main-content">
-            <div class="container">
-                <!-- Time Display -->
-                <div class="time-display-container" data-aos="fade-up">
-                    <div class="current-time" id="currentTime"></div>
+            <div class="container-fluid">
+                <div class="row">
+                    <!-- Main Timer Section -->
+                    <div class="col-lg-8">
+                        <section class="timer-section" data-aos="zoom-in">
+                            <div class="timer-card">
+                                <!-- Mode Tabs -->
+                                <div class="mode-tabs">
+                                    <button class="mode-tab active" id="workTab" data-mode="work">
+                                        <i class="bi bi-laptop"></i>
+                                        <span>Work Mode</span>
+                                    </button>
+                                    <button class="mode-tab" id="breakTab" data-mode="break">
+                                        <i class="bi bi-cup-hot"></i>
+                                        <span>Break Mode</span>
+                                    </button>
+                                </div>
+
+                                <!-- Timer Display -->
+                                <div class="timer-display">
+                                    <div class="timer-circle">
+                                        <svg class="progress-ring" width="300" height="300">
+                                            <defs>
+                                                <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                                    <stop offset="0%" style="stop-color:#ff6b9d;stop-opacity:1" />
+                                                    <stop offset="100%" style="stop-color:#feca57;stop-opacity:1" />
+                                                </linearGradient>
+                                            </defs>
+                                            <circle class="progress-ring-bg" cx="150" cy="150" r="130" />
+                                            <circle class="progress-ring-fill" id="progressRing" cx="150" cy="150" r="130" />
+                                        </svg>
+                                        <div class="timer-text">
+                                            <div class="time-display" id="timerDisplay">25:00</div>
+                                            <div class="session-info">
+                                                <span class="session-count">Session #<span id="sessionNumber">1</span></span>
+                                            </div>
+                                            <div class="motivational-message" id="motivationalMessage">Ready to focus? 🌟</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Quick Settings -->
+                                <div class="quick-settings">
+                                    <div class="duration-pills">
+                                        <button class="duration-btn active" data-time="25">25min</button>
+                                        <button class="duration-btn" data-time="50">50min</button>
+                                        <button class="duration-btn" data-time="75">75min</button>
+                                        <button class="duration-btn custom" data-time="custom">
+                                            <i class="bi bi-gear"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Control Buttons -->
+                                <div class="timer-controls">
+                                    <button class="btn btn-control btn-skip" id="skipBtn">
+                                        <i class="bi bi-skip-forward-fill"></i>
+                                        <span>Skip</span>
+                                    </button>
+                                    <button class="btn btn-control btn-main" id="startBtn">
+                                        <i class="bi bi-play-fill"></i>
+                                        <span>Start</span>
+                                    </button>
+                                    <button class="btn btn-control btn-main" id="pauseBtn" style="display: none;">
+                                        <i class="bi bi-pause-fill"></i>
+                                        <span>Pause</span>
+                                    </button>
+                                    <button class="btn btn-control btn-reset" id="resetBtn">
+                                        <i class="bi bi-arrow-clockwise"></i>
+                                        <span>Reset</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Statistics Dashboard -->
+                        <section class="stats-section" data-aos="fade-up" data-aos-delay="100">
+                            <div class="stats-card">
+                                <div class="stats-header">
+                                    <h3 class="stats-title">
+                                        <i class="bi bi-graph-up-arrow"></i>
+                                        Your Progress
+                                    </h3>
+                                    <div class="stats-period">
+                                        <button class="period-btn active" data-period="today">Today</button>
+                                        <button class="period-btn" data-period="week">Week</button>
+                                        <button class="period-btn" data-period="all">All Time</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="stats-grid">
+                                    <div class="stat-item primary">
+                                        <div class="stat-icon">
+                                            <i class="bi bi-check-circle-fill"></i>
+                                        </div>
+                                        <div class="stat-content">
+                                            <div class="stat-number" id="totalSessions">0</div>
+                                            <div class="stat-label">Sessions</div>
+                                        </div>
+                                    </div>
+                                    <div class="stat-item secondary">
+                                        <div class="stat-icon">
+                                            <i class="bi bi-clock-fill"></i>
+                                        </div>
+                                        <div class="stat-content">
+                                            <div class="stat-number" id="totalFocusTime">0h 0m</div>
+                                            <div class="stat-label">Focus Time</div>
+                                        </div>
+                                    </div>
+                                    <div class="stat-item success">
+                                        <div class="stat-icon">
+                                            <i class="bi bi-fire-fill"></i>
+                                        </div>
+                                        <div class="stat-content">
+                                            <div class="stat-number" id="currentStreak">0</div>
+                                            <div class="stat-label">Day Streak</div>
+                                        </div>
+                                    </div>
+                                    <div class="stat-item info">
+                                        <div class="stat-icon">
+                                            <i class="bi bi-trophy-fill"></i>
+                                        </div>
+                                        <div class="stat-content">
+                                            <div class="stat-number" id="todaySessions">0</div>
+                                            <div class="stat-label">Today</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Progress Chart -->
+                                <div class="progress-chart">
+                                    <h4>Weekly Progress</h4>
+                                    <div class="chart-bars">
+                                        <div class="chart-bar">
+                                            <div class="bar-fill" style="height: 20%"></div>
+                                            <span class="bar-label">Mon</span>
+                                        </div>
+                                        <div class="chart-bar">
+                                            <div class="bar-fill" style="height: 40%"></div>
+                                            <span class="bar-label">Tue</span>
+                                        </div>
+                                        <div class="chart-bar">
+                                            <div class="bar-fill" style="height: 60%"></div>
+                                            <span class="bar-label">Wed</span>
+                                        </div>
+                                        <div class="chart-bar">
+                                            <div class="bar-fill" style="height: 30%"></div>
+                                            <span class="bar-label">Thu</span>
+                                        </div>
+                                        <div class="chart-bar">
+                                            <div class="bar-fill" style="height: 80%"></div>
+                                            <span class="bar-label">Fri</span>
+                                        </div>
+                                        <div class="chart-bar">
+                                            <div class="bar-fill" style="height: 45%"></div>
+                                            <span class="bar-label">Sat</span>
+                                        </div>
+                                        <div class="chart-bar today">
+                                            <div class="bar-fill" style="height: 10%"></div>
+                                            <span class="bar-label">Sun</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+
+                    <!-- Sidebar -->
+                    <div class="col-lg-4">
+                        <!-- Settings Panel -->
+                        <section class="settings-panel" data-aos="fade-left" data-aos-delay="200">
+                            <div class="panel-card">
+                                <div class="panel-header">
+                                    <h3 class="panel-title">
+                                        <i class="bi bi-sliders"></i>
+                                        Settings
+                                    </h3>
+                                </div>
+                                
+                                <div class="panel-content">
+                                    <!-- Timer Settings -->
+                                    <div class="setting-group">
+                                        <label class="setting-label">
+                                            <i class="bi bi-laptop"></i>
+                                            Work Duration
+                                        </label>
+                                        <div class="duration-selector">
+                                            <button class="time-btn" data-minutes="25">25</button>
+                                            <button class="time-btn" data-minutes="50">50</button>
+                                            <button class="time-btn" data-minutes="75">75</button>
+                                            <button class="time-btn" data-minutes="100">100</button>
+                                        </div>
+                                    </div>
+
+                                    <div class="setting-group">
+                                        <label class="setting-label">
+                                            <i class="bi bi-cup-hot"></i>
+                                            Break Duration
+                                        </label>
+                                        <div class="duration-selector">
+                                            <button class="time-btn" data-minutes="5">5</button>
+                                            <button class="time-btn" data-minutes="10">10</button>
+                                            <button class="time-btn" data-minutes="15">15</button>
+                                            <button class="time-btn" data-minutes="20">20</button>
+                                        </div>
+                                    </div>
+
+                                    <div class="setting-group">
+                                        <label class="setting-label">
+                                            <i class="bi bi-volume-up-fill"></i>
+                                            Volume
+                                        </label>
+                                        <div class="volume-control">
+                                            <input type="range" class="volume-slider" id="volumeControl" min="0" max="100" value="50">
+                                            <div class="volume-level">
+                                                <i class="bi bi-volume-mute-fill" id="volumeIcon"></i>
+                                                <span id="volumeValue">50%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="setting-group">
+                                        <div class="setting-toggle">
+                                            <label class="toggle-label">
+                                                <i class="bi bi-bell-fill"></i>
+                                                Browser Notifications
+                                            </label>
+                                            <div class="toggle-switch">
+                                                <input type="checkbox" id="notificationToggle" checked>
+                                                <span class="toggle-slider"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="setting-group">
+                                        <div class="setting-toggle">
+                                            <label class="toggle-label">
+                                                <i class="bi bi-moon-fill"></i>
+                                                Auto-start Breaks
+                                            </label>
+                                            <div class="toggle-switch">
+                                                <input type="checkbox" id="autoStartToggle" checked>
+                                                <span class="toggle-slider"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Achievements Panel -->
+                        <section class="achievements-panel" data-aos="fade-left" data-aos-delay="300">
+                            <div class="panel-card">
+                                <div class="panel-header">
+                                    <h3 class="panel-title">
+                                        <i class="bi bi-award-fill"></i>
+                                        Achievements
+                                    </h3>
+                                </div>
+                                
+                                <div class="panel-content">
+                                    <div class="achievements-grid">
+                                        <div class="achievement-badge unlocked">
+                                            <div class="badge-icon">🌟</div>
+                                            <div class="badge-title">First Timer</div>
+                                            <div class="badge-desc">Complete your first session</div>
+                                        </div>
+                                        <div class="achievement-badge locked">
+                                            <div class="badge-icon">🔥</div>
+                                            <div class="badge-title">On Fire</div>
+                                            <div class="badge-desc">7 day streak</div>
+                                        </div>
+                                        <div class="achievement-badge locked">
+                                            <div class="badge-icon">⚡</div>
+                                            <div class="badge-title">Speed Focus</div>
+                                            <div class="badge-desc">Complete 10 sessions</div>
+                                        </div>
+                                        <div class="achievement-badge locked">
+                                            <div class="badge-icon">👑</div>
+                                            <div class="badge-title">Focus Master</div>
+                                            <div class="badge-desc">100 sessions</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Actions Panel -->
+                        <section class="actions-panel" data-aos="fade-left" data-aos-delay="400">
+                            <div class="panel-card">
+                                <div class="panel-content">
+                                    <button class="btn btn-outline-danger btn-block mb-2" id="clearDataBtn">
+                                        <i class="bi bi-trash"></i>
+                                        Clear All Data
+                                    </button>
+                                    <button class="btn btn-outline-primary btn-block" id="exportDataBtn">
+                                        <i class="bi bi-download"></i>
+                                        Export Statistics
+                                    </button>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
                 </div>
-
-                <!-- Timer Section -->
-                <section class="timer-section" data-aos="zoom-in">
-                    <div class="timer-card">
-                        <!-- Mode Indicator -->
-                        <div class="mode-indicator">
-                            <span class="mode-badge" id="modeBadge">
-                                <i class="bi bi-laptop"></i> Work Time
-                            </span>
-                        </div>
-
-                        <!-- Timer Display -->
-                        <div class="timer-display">
-                            <div class="timer-circle">
-                                <svg class="progress-ring" width="250" height="250">
-                                    <circle class="progress-ring-bg" cx="125" cy="125" r="110" />
-                                    <circle class="progress-ring-fill" id="progressRing" cx="125" cy="125" r="110" />
-                                </svg>
-                                <div class="timer-text">
-                                    <div class="time-display" id="timerDisplay">25:00</div>
-                                    <div class="motivational-message" id="motivationalMessage">Ready to focus? 🌟</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Control Buttons -->
-                        <div class="timer-controls">
-                            <button class="btn btn-primary btn-lg control-btn" id="startBtn">
-                                <i class="bi bi-play-fill"></i> Start
-                            </button>
-                            <button class="btn btn-warning btn-lg control-btn" id="pauseBtn" style="display: none;">
-                                <i class="bi bi-pause-fill"></i> Pause
-                            </button>
-                            <button class="btn btn-danger btn-lg control-btn" id="resetBtn">
-                                <i class="bi bi-arrow-clockwise"></i> Reset
-                            </button>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Timer Settings -->
-                <section class="settings-section" data-aos="fade-up" data-aos-delay="100">
-                    <div class="settings-card">
-                        <h3 class="settings-title">
-                            <i class="bi bi-gear-fill"></i> Timer Settings
-                        </h3>
-                        
-                        <div class="row g-3">
-                            <div class="col-md-6">
-                                <label class="form-label">Work Duration</label>
-                                <select class="form-select" id="workDuration">
-                                    <option value="25">25 minutes</option>
-                                    <option value="50">50 minutes</option>
-                                    <option value="75">75 minutes</option>
-                                    <option value="100">100 minutes</option>
-                                </select>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label">Break Duration</label>
-                                <select class="form-select" id="breakDuration">
-                                    <option value="5">5 minutes</option>
-                                    <option value="10">10 minutes</option>
-                                    <option value="15">15 minutes</option>
-                                    <option value="20">20 minutes</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="mt-3">
-                            <label class="form-label">Volume</label>
-                            <input type="range" class="form-range" id="volumeControl" min="0" max="100" value="50">
-                            <small class="text-muted">Volume: <span id="volumeValue">50%</span></small>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Statistics Section -->
-                <section class="stats-section" data-aos="fade-up" data-aos-delay="200">
-                    <div class="stats-card">
-                        <h3 class="stats-title">
-                            <i class="bi bi-graph-up"></i> Your Progress
-                        </h3>
-                        
-                        <div class="row g-3 text-center">
-                            <div class="col-6 col-md-3">
-                                <div class="stat-item">
-                                    <div class="stat-number" id="totalSessions">0</div>
-                                    <div class="stat-label">Total Sessions</div>
-                                </div>
-                            </div>
-                            <div class="col-6 col-md-3">
-                                <div class="stat-item">
-                                    <div class="stat-number" id="totalFocusTime">0h 0m</div>
-                                    <div class="stat-label">Focus Time</div>
-                                </div>
-                            </div>
-                            <div class="col-6 col-md-3">
-                                <div class="stat-item">
-                                    <div class="stat-number" id="todaySessions">0</div>
-                                    <div class="stat-label">Today</div>
-                                </div>
-                            </div>
-                            <div class="col-6 col-md-3">
-                                <div class="stat-item">
-                                    <div class="stat-number" id="currentStreak">0</div>
-                                    <div class="stat-label">Day Streak</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="mt-3 text-center">
-                            <button class="btn btn-sm btn-outline-danger" id="clearDataBtn">
-                                <i class="bi bi-trash"></i> Clear All Data
-                            </button>
-                        </div>
-                    </div>
-                </section>
             </div>
         </main>
 
         <!-- Footer -->
-        <footer class="footer text-center py-3">
-            <div class="container">
-                <div class="theme-toggle">
-                    <button class="btn btn-outline-primary btn-sm" id="themeToggle">
-                        <i class="bi bi-palette-fill"></i> Pink Mode
-                    </button>
+        <footer class="footer">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p class="footer-text">
+                            Made with 💕 for productivity
+                        </p>
+                    </div>
+                    <div class="col-md-6 text-end">
+                        <p class="footer-text">
+                            Version 1.0.0 | PomPomFocus
+                        </p>
+                    </div>
                 </div>
-                <p class="mb-0">Made with 💕 for productivity</p>
             </div>
         </footer>
     </div>

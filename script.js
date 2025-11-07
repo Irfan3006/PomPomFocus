@@ -88,19 +88,23 @@ class PomPomFocus {
         document.getElementById('settingsBtn').addEventListener('click', () => this.toggleSettings());
         document.getElementById('closeSettings').addEventListener('click', () => this.toggleSettings());
         
-        // Settings options
-        document.querySelectorAll('.option-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
+        // Settings options - use event delegation for better reliability
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('option-btn')) {
                 const minutes = parseInt(e.target.dataset.minutes);
                 const settingGroup = e.target.closest('.setting-group');
-                const isWork = settingGroup.querySelector('.setting-label').textContent.includes('Focus');
+                const label = settingGroup?.querySelector('.setting-label');
                 
-                if (isWork) {
-                    this.setWorkDuration(minutes);
-                } else {
-                    this.setBreakDuration(minutes);
+                if (label) {
+                    const isWork = label.textContent.includes('Focus');
+                    
+                    if (isWork) {
+                        this.setWorkDuration(minutes);
+                    } else {
+                        this.setBreakDuration(minutes);
+                    }
                 }
-            });
+            }
         });
         
         // Volume control
@@ -236,6 +240,9 @@ class PomPomFocus {
     }
     
     setWorkDuration(minutes) {
+        const validWorkTimes = [25, 50, 75, 100];
+        if (!validWorkTimes.includes(minutes)) return;
+        
         this.workTime = minutes;
         if (!this.isRunning && !this.isBreak) {
             this.currentTime = this.workTime * 60;
@@ -257,27 +264,47 @@ class PomPomFocus {
     }
     
     setBreakDuration(minutes) {
+        const validBreakTimes = [5, 10, 15, 20];
+        if (!validBreakTimes.includes(minutes)) return;
+        
         this.breakTime = minutes;
         if (!this.isRunning && this.isBreak) {
             this.currentTime = this.breakTime * 60;
             this.updateDisplay();
         }
         
+        // Update UI immediately
         this.updateSettingsOptions('break', minutes);
+        
+        // Save settings
         this.saveSettings();
     }
     
     updateSettingsOptions(type, minutes) {
-        const settingIndex = type === 'focus' ? 0 : 1;
+        // Find the setting group by label text instead of index
         const settingGroups = document.querySelectorAll('.setting-group');
-        const optionButtons = settingGroups[settingIndex]?.querySelectorAll('.option-btn');
+        let targetGroup = null;
         
-        optionButtons?.forEach(btn => {
-            btn.classList.remove('active');
-            if (parseInt(btn.dataset.minutes) === minutes) {
-                btn.classList.add('active');
+        settingGroups.forEach(group => {
+            const label = group.querySelector('.setting-label');
+            if (label) {
+                if (type === 'focus' && label.textContent.includes('Focus')) {
+                    targetGroup = group;
+                } else if (type === 'break' && label.textContent.includes('Break')) {
+                    targetGroup = group;
+                }
             }
         });
+        
+        if (targetGroup) {
+            const optionButtons = targetGroup.querySelectorAll('.option-btn');
+            optionButtons.forEach(btn => {
+                btn.classList.remove('active');
+                if (parseInt(btn.dataset.minutes) === minutes) {
+                    btn.classList.add('active');
+                }
+            });
+        }
     }
     
     tick() {
@@ -469,9 +496,11 @@ class PomPomFocus {
         const settingsPanel = document.getElementById('settingsPanel');
         settingsPanel.style.display = 'block';
         
-        // Update settings UI
-        this.updateSettingsOptions('focus', this.workTime);
-        this.updateSettingsOptions('break', this.breakTime);
+        // Update settings UI setelah element terlihat
+        setTimeout(() => {
+            this.updateSettingsOptions('focus', this.workTime);
+            this.updateSettingsOptions('break', this.breakTime);
+        }, 50);
         
         // Scroll to settings
         settingsPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -564,10 +593,12 @@ class PomPomFocus {
             document.getElementById('notificationToggle').checked = this.notificationsEnabled;
         }
         
-        // Update UI
-        this.updateSettingsOptions('focus', this.workTime);
-        this.updateSettingsOptions('break', this.breakTime);
-        this.updateDurationButtons();
+        // Update UI - defer to ensure DOM is ready
+        setTimeout(() => {
+            this.updateSettingsOptions('focus', this.workTime);
+            this.updateSettingsOptions('break', this.breakTime);
+            this.updateDurationButtons();
+        }, 100);
     }
     
     updateDurationButtons() {

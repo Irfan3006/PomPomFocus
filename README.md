@@ -212,17 +212,24 @@ PomPomFocus/
 
 ## 🔄 Version History
 
-### Version 2.0.0 - UI/UX Revolution
-- Complete redesign with glassmorphism effects
-- Added achievements system with 8 badges
-- Enhanced statistics dashboard with weekly charts
-- Improved mobile responsiveness and touch interactions
-- Added keyboard shortcuts and accessibility features
-- Implemented animated backgrounds and micro-interactions
-- Enhanced audio system with multiple sound effects
-- Advanced settings panel with modern controls
+### Version 2.2.0 - Bug Fixes & Improvements
+- Fixed break duration button visibility and functionality
+- Improved event delegation for timer settings
+- Robust DOM element finding using label text matching
+- Added input validation for work and break duration changes
+- Better timing for UI updates with deferred execution
+- Default break duration correctly set to 5 minutes
 
-### Version 1.0.0 - Original Release
+### Version 2.1.0 - Minimalist Design Overhaul
+- Complete UI redesign with clean, distraction-free interface
+- Simplified layout focusing on core functionality
+- Streamlined settings panel with collapsible design
+- Reduced visual complexity while maintaining cute aesthetics
+- Optimized responsive design for all screen sizes
+- Improved performance with lightweight code
+- Enhanced accessibility and keyboard navigation
+
+### Version 1.0.0 - Original Release (Glassmorphism)
 - Basic Pomodoro timer functionality
 - Simple statistics tracking
 - Pink theme toggle

@@ -1,95 +1,79 @@
-# PomPomFocus - Modern Cute Pomodoro Timer 🐰
+# PomPomFocus - Minimalist Cute Pomodoro Timer 🐰
 
-A delightful and modern Pomodoro timer web application with an enhanced user experience, featuring glassmorphism design, animated backgrounds, achievements system, and comprehensive productivity tracking.
+A delightful and minimalist Pomodoro timer web application that combines clean design with cute aesthetics. Focus on what matters most - your productivity - with a simple, beautiful, and functional timer.
 
 ## ✨ Key Features
 
-### 🎯 Enhanced Timer Functionality
+### 🎯 Core Timer Functionality
 - **Standard Pomodoro**: 25 minutes work, 5 minutes break
 - **Custom Durations**: Work times (25, 50, 75, 100 minutes), Break times (5, 10, 15, 20 minutes)
-- **Advanced Controls**: Start, Pause, Reset, and Skip functionality
-- **Visual Progress**: Large circular progress indicator with gradient fills
-- **Quick Duration Pills**: Fast access to common timer durations
-- **Mode Tabs**: Easy switching between Work and Break modes
+- **Essential Controls**: Start, Pause, Reset, and Skip functionality
+- **Clean Progress**: Minimal circular progress indicator with smooth animations
+- **Quick Duration Buttons**: Fast access to common timer durations
+- **Mode Switcher**: Simple toggle between Focus and Break modes
 - **Auto-start Sessions**: Optional automatic progression to next session
 - **Session Counter**: Track current session number
 
-### 🎨 Modern UI/UX Design
-- **Glassmorphism Design**: Modern frosted glass effect with backdrop blur
-- **Animated Background**: Floating shapes with smooth animations
-- **Gradient Themes**: Beautiful color gradients with Pink Mode toggle
-- **Responsive Layout**: Perfect adaptation for mobile, tablet, and desktop
-- **Micro-interactions**: Hover effects, smooth transitions, and visual feedback
-- **Custom Typography**: Fredoka and Comfortaa fonts for friendly appearance
-- **Dark Mode Support**: Automatic adaptation to system preferences
+### 🎨 Minimalist UI Design
+- **Clean Layout**: Intentionally minimal interface to reduce distractions
+- **Subtle Animations**: Gentle micro-interactions and smooth transitions
+- **Soft Color Palette**: Calming colors with optional Pink theme
+- **Responsive Design**: Perfect adaptation for mobile, tablet, and desktop
+- **Typography**: Clean Inter font with Fredoka for cute touches
+- **Light & Dark Mode**: Automatic adaptation to system preferences
 - **Accessibility**: Full keyboard shortcuts and screen reader support
 
-### 🏆 Gamification & Achievements
-- **8 Achievement Badges**: Unlock rewards for various accomplishments
-- **Achievement Notifications**: Pop-up notifications when milestones are reached
-- **Progress Tracking**: Visual indicators for locked/unlocked achievements
-- **Motivational Elements**: Encouragement through gamification
-
-### 📊 Enhanced Statistics Dashboard
-- **Multiple Time Periods**: View stats for Today, Week, or All Time
-- **Weekly Progress Chart**: Visual bar chart showing daily activity
-- **Comprehensive Metrics**:
+### 📊 Simple Statistics
+- **Essential Metrics**: Track what matters most
   - Total sessions completed
   - Total focus time
   - Sessions completed today
   - Current day streak
-  - Weekly session history
+- **Clean Display**: Minimal stat cards with clear numbers
 - **Data Export**: Download your statistics as JSON
 - **Data Management**: Clear all data with confirmation
 
-### 🔊 Enhanced Audio Features
-- **Web Audio API**: Custom generated cute sounds
-- **Dynamic Volume Control**: Real-time volume adjustment with visual feedback
-- **Multiple Sound Effects**: Start, completion, and skip sounds
-- **Volume Icons**: Dynamic icons showing current volume level
-- **Mute Support**: Full audio control including mute functionality
+### 🔊 Subtle Audio Features
+- **Web Audio API**: Gentle notification sounds
+- **Volume Control**: Simple volume slider with visual feedback
+- **Soft Sound Effects**: Start and completion sounds
+- **Mute Support**: Full audio control
 
-### ⚙️ Advanced Settings Panel
-- **Intuitive Controls**: Modern toggle switches and buttons
+### ⚙️ Streamlined Settings
+- **Collapsible Panel**: Settings hidden until needed
+- **Simple Controls**: Clean toggle switches and buttons
 - **Browser Notifications**: Toggle native notifications on/off
-- **Auto-start Preferences**: Control automatic session progression
-- **Visual Settings**: Easy-to-use duration selectors
+- **Auto-start Toggle**: Control automatic session progression
+- **Duration Selectors**: Easy-to-use time presets
 - **Persistent Preferences**: All settings saved automatically
 
-### 🎮 Interactive Elements
-- **Keyboard Shortcuts**: Space (start/pause), Ctrl+R (reset), Ctrl+S (skip)
-- **Hover Effects**: Interactive feedback on all clickable elements
-- **Loading Animations**: Smooth loading states and transitions
-- **Success Messages**: Visual confirmation for user actions
-- **Mobile Optimized**: Touch-friendly interface for mobile devices
+### 🎮 User-Friendly Interactions
+- **Keyboard Shortcuts**: Space (start/pause), Ctrl+R (reset), Ctrl+S (skip), Escape (close settings)
+- **Hover States**: Subtle feedback on interactive elements
+- **Smooth Transitions**: Clean animations throughout
+- **Success Messages**: Simple confirmation for user actions
+- **Mobile Optimized**: Touch-friendly interface for all devices
 
-### 🌈 Visual Enhancements
-- **Animated Shapes**: Background elements with continuous animation
-- **Shimmer Effects**: Subtle animation on cards and buttons
-- **Progress Animations**: Smooth transitions for all progress indicators
-- **Status Indicators**: Clear visual feedback for current mode
-- **Responsive Charts**: Adaptive data visualization
+## 🎯 Design Philosophy
 
-## 🎯 User Experience Improvements
+### Minimalism Meets Functionality
+- **Intentional Simplicity**: Every element serves a purpose
+- **Distraction-Free Interface**: Focus on productivity, not on the app
+- **Clean Visual Hierarchy**: Most important elements prominently displayed
+- **Thoughtful Interactions**: Every animation and transition has meaning
 
-### Navigation & Layout
-- **Sticky Header**: Always-accessible controls and theme toggle
-- **Sidebar Organization**: Logical grouping of settings and achievements
-- **Mobile-First Design**: Optimized for small screens with collapsible elements
-- **Smooth Scrolling**: Animated navigation between sections
+### User-Centered Design
+- **Cognitive Load Reduction**: Simple interface reduces mental effort
+- **Predictable Patterns**: Consistent interactions throughout
+- **Forgiving Design**: Easy to recover from mistakes
+- **Progressive Disclosure**: Settings hidden until needed
 
 ### Performance & Accessibility
+- **Lightweight Code**: Fast loading and smooth performance
 - **Reduced Motion Support**: Respects user accessibility preferences
-- **High Contrast Mode**: Enhanced visibility for users with visual impairments
-- **Print Styles**: Optimized layout for printing statistics
-- **Fast Loading**: Efficient code structure for quick initialization
-- **Local Storage**: All data stored locally for privacy and speed
-
-### Feedback & Communication
-- **Real-time Updates**: Instant visual feedback for all actions
-- **Achievement Pop-ups**: Celebratory notifications for milestones
-- **Status Messages**: Clear communication of app state
-- **Error Prevention**: Confirmation dialogs for destructive actions
+- **Screen Reader Friendly**: Semantic HTML and ARIA support
+- **Keyboard Navigation**: Full keyboard control for all functions
+- **Local Storage**: Privacy-focused data storage
 
 ## 🎮 Keyboard Shortcuts
 

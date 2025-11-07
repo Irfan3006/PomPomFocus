@@ -220,6 +220,7 @@ PomPomFocus/
 - Better timing for UI updates with deferred execution
 - Default break duration correctly set to 5 minutes
 - Quick settings buttons now adapt between focus and break durations
+- Disabled duration controls while the timer is running to prevent accidental changes
 
 ### Version 2.1.0 - Minimalist Design Overhaul
 - Complete UI redesign with clean, distraction-free interface

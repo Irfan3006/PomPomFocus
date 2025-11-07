@@ -55,6 +55,7 @@ class PomPomFocus {
         this.updateSessionNumber();
         this.setupAudio();
         this.updateQuickSettingsButtons();
+        this.setSelectableButtonsDisabled(false);
         
         // Request notification permission
         if ('Notification' in window && Notification.permission === 'default') {
@@ -212,6 +213,7 @@ class PomPomFocus {
         
         this.startSound();
         this.updateMotivationalMessage();
+        this.setSelectableButtonsDisabled(true);
         
         this.interval = setInterval(() => this.tick(), 1000);
     }
@@ -222,6 +224,7 @@ class PomPomFocus {
         
         document.getElementById('startBtn').style.display = 'flex';
         document.getElementById('pauseBtn').style.display = 'none';
+        this.setSelectableButtonsDisabled(false);
     }
     
     reset() {
@@ -247,8 +250,7 @@ class PomPomFocus {
     }
     
     setWorkDuration(minutes) {
-        const validWorkTimes = [25, 50, 75, 100];
-        if (!validWorkTimes.includes(minutes)) return;
+        if (!this.workDurations.includes(minutes)) return;
         
         this.workTime = minutes;
         if (!this.isRunning && !this.isBreak) {
@@ -267,8 +269,7 @@ class PomPomFocus {
     }
     
     setBreakDuration(minutes) {
-        const validBreakTimes = [5, 10, 15, 20];
-        if (!validBreakTimes.includes(minutes)) return;
+        if (!this.breakDurations.includes(minutes)) return;
         
         this.breakTime = minutes;
         if (!this.isRunning && this.isBreak) {
@@ -635,6 +636,14 @@ class PomPomFocus {
         });
         
         this.updateDurationButtons();
+    }
+    
+    setSelectableButtonsDisabled(disabled) {
+        const buttons = document.querySelectorAll('.duration-btn, .option-btn');
+        buttons.forEach(btn => {
+            btn.disabled = disabled;
+            btn.classList.toggle('is-disabled', disabled);
+        });
     }
     
     saveSettings() {

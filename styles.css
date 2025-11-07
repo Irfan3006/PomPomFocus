@@ -573,6 +573,15 @@ body {
     color: var(--text-light);
 }
 
+.duration-btn:disabled,
+.option-btn:disabled,
+.duration-btn.is-disabled,
+.option-btn.is-disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
 /* Volume Control */
 .volume-control {
     display: flex;

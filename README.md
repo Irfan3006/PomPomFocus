@@ -4,7 +4,7 @@
 
 It’s made for everyone, no tech skills needed. Open it, set your time, and let the bunny keep you on track! 🌸  
 
-👉 **Try it here:** [https://pom-pom-focus.vercel.app/](https://pom-pom-focus.vercel.app/)  
+👉 **Try it here:** [https://pom-pom-focus.vercel.app/](https://pompomfocus.vercel.app) 
 
 ---
 

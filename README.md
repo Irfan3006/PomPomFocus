@@ -55,9 +55,4 @@ You don’t need to be tech-savvy, just press start and focus! 💕
 
 ---
 
-## 📄 License  
-Free for personal or commercial use.  
-  
----
-
 **Made with 💕 for productivity by [Irfan Syarifudin](https://irfan-syarifudin.vercel.app/)** 
